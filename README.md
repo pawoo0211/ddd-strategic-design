@@ -208,3 +208,61 @@ docker compose -p kitchenpos up -d
 | 배달 대행사 호출 | Call Delivery     | 손님에게 배달을 하기 외부 배달 대행사에게 요청하는 행위                                                       |
 
 ## 모델링
+
+### 상품
+- Product는 식별자와 Name, Price를 가진다.
+- Name은 Profanity가 포함되서는 안된다.
+- Price는 0 이상이어야 한다.
+
+### 메뉴 그룹
+- MenuGroup은 식별자와 Name을 가진다.
+- Name은 반드시 존재해야 한다.
+
+### 메뉴
+- Menu는 식별자와 Name, Price, MenuGroup, 메뉴 노츨 여부, 메뉴 상품 목록, MenuGroup 식별자를 가진다.
+- Name은 Profanity가 포함되서는 안된다.
+- Price는 0 이상이어야 한다.
+- 메뉴 상품 목록은 반드시 한개 이상 존재해야 한다.
+- Menu의 가격과 메뉴 상품 목록의 가격을 비교할 수 있다.
+
+### 포장 주문
+- Order은 식별자, Type, Status, 주문 시간, 주문 항목을 가진다.
+- Type은 반드시 존재해야 한다.
+- Order이 등록되고 완료 될때까지 Order의 status는 변경된다.
+- Order의 Status가 Accept가 아닐 때 Serve로 변경될 수 없다.
+- Order의 Status가 Serve가 아닐 때 Complete로 변경될 수 없다.
+- 주문 항목은 반드시 1개 이상이어야 한다.
+- 주문 항목의 가격과 메뉴의 가격을 비교할 수 있다.
+
+### 주문 테이블
+- Table은 식별자, Name, Number Of Guests, 손님 착석 여부를 가진다.
+- Name은 반드시 존재해야 한다.
+- Register Table을 하게 되면 Table의 Number Of Guests는 0이고 Customer는 없다.
+- Sit Table을 하게 되면 손님이 착석한다.
+- Order의 상태가 Complete이어야 Clear Table을 할 수 있다.
+- Clear Table을 하게 되면 Empty Table이 된다.
+- Sit Table 후에 Change Number Of Guests를 할 수 있다.
+
+### 매장 주문
+- Order은 식별자, Type, Status, 주문 시간, 주문 항목, Table, Table 식별자를 가진다.
+- Type은 반드시 존재해야 한다.
+- Order이 등록되고 완료 될때까지 Order의 status는 변경된다.
+- Order의 Status가 Accept가 아닐 때 Serve로 변경될 수 없다.
+- Order의 Status가 Serve가 아닐 때 Complete로 변경될 수 없다.
+- Order Status가 Complete 일 때 Table의 Order Status는 Complete일 수 없다.
+- 주문 항목의 가격과 메뉴의 가격을 비교할 수 있다.
+- 매장 주문 시 Table은 Sit Table 상태여야 한다.
+
+### 배달 주문
+- Order은 식별자, Type, Status, 주문 시간, 주문 항목, DeliveryAddress를 가진다.
+- Type은 반드시 존재해야 한다.
+- Order이 등록되고 완료 될때까지 Order의 status는 변경된다.
+- Order의 Status가 Watting일 때 Accept로 변경될 수 있다.
+- Call Delivery 이후에 Order Status가 Accept로 변경된다.
+- Order의 Status가 Accept일 때 Serve로 변경된다.
+- Order의 Status가 Serve일 때 Start delivery로 변경된다.
+- Order의 Status가 Start delivery일 때 Complete Delivery로 변경된다.
+- Order의 Status가 Complete Delivery일 때 Complete로 변경된다.
+- DeliveryAddress를 반드시 존재해야 한다.
+- 주문 항목은 반드시 1개 이상이어야 한다.
+- 주문 항목의 가격과 메뉴의 가격을 비교할 수 있다.
