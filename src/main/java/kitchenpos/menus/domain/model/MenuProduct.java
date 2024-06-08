@@ -2,7 +2,7 @@ package kitchenpos.menus.domain.model;
 
 import jakarta.persistence.*;
 
-import kitchenpos.domain.Product;
+import kitchenpos.products.model.Product;
 
 import java.util.UUID;
 
