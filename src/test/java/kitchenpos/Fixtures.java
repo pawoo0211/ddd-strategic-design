@@ -3,11 +3,11 @@ package kitchenpos;
 import kitchenpos.menus.domain.model.Menu;
 import kitchenpos.menus.domain.model.MenuGroup;
 import kitchenpos.menus.domain.model.MenuProduct;
-import kitchenpos.domain.Order;
-import kitchenpos.domain.OrderLineItem;
-import kitchenpos.domain.OrderStatus;
-import kitchenpos.domain.OrderTable;
-import kitchenpos.domain.OrderType;
+import kitchenpos.orders.domain.model.Order;
+import kitchenpos.orders.domain.model.OrderLineItem;
+import kitchenpos.orders.domain.model.OrderStatus;
+import kitchenpos.orders.domain.model.OrderTable;
+import kitchenpos.orders.domain.model.OrderType;
 import kitchenpos.products.model.Product;
 
 import java.math.BigDecimal;
